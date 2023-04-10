@@ -28,7 +28,6 @@ public record CommandContext
     /// <summary>
     /// Creates a context with the correct commands in the correct order
     /// </summary>
-    /// <returns></returns>
     public static CommandContext Create()
     {
         var commands = new ICommand[] {
