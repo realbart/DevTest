@@ -1,10 +1,14 @@
 ﻿namespace Refactoring;
 
+using Refactoring.Services.SurfaceCalculation;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+
 public class SurfaceAreaCalculator
 {
-    object[] arrObjects { get; set; }
-    public double[] arrSurfaceAreas { get; set; }
+    public List<ISurface> Objects { get; set; } = new List<ISurface>();
+    public List<double> SurfaceAreas { get; set; } = new List<double>();
     internal Logger Logger { get; private set; }
 
     public SurfaceAreaCalculator()
@@ -25,39 +29,6 @@ public class SurfaceAreaCalculator
         this.Logger.Log("- exit (exit the loop)");
     }
 
-    public void Add(object pObject)
-    {
-        object[] arrObjects2;
-        if (this.arrObjects == null)
-        {
-            this.arrObjects = new object[1];
-            if (this.arrObjects != null)
-            {
-                this.arrObjects[0] = pObject;
-            }
-        }
-        else
-        {
-            if (this.arrObjects != null)
-            {
-                arrObjects2 = new object[this.arrObjects.Length + 1];
-                int i;
-                for (i = 0; i < arrObjects2.Length; i++)
-                {
-                    if (i == arrObjects2.Length - 1)
-                    {
-                        arrObjects2[i] = pObject;
-                    }
-                    else
-                    {
-                        arrObjects2[i] = this.arrObjects[i];
-                    }
-                }
-                this.arrObjects = arrObjects2;
-            }
-        }
-    }
-
     public void ReadString(string pCommand)
     {
         string[] arrCommands = pCommand.Split(' ');
@@ -69,33 +40,33 @@ public class SurfaceAreaCalculator
                     switch (arrCommands[1].ToLower())
                     {
                         case "square":
-                            Square square = new Square();
-                            square.Side = double.Parse(arrCommands[2]);
-                            this.Add(square);
-                            this.CalculateSurfaceAreas();
+                            var square = new Square(Side: double.Parse(arrCommands[2]));
+                            Objects.Add(square);
+                            CalculateSurfaceAreas();
                             Console.WriteLine("{0} created!", square.GetType().Name);
                             break;
                         case "circle":
-                            Circle circle = new Circle();
-                            circle.Radius = double.Parse(arrCommands[2]);
-                            this.Add(circle);
-                            this.CalculateSurfaceAreas();
+                            var circle = new Circle(Radius: double.Parse(arrCommands[2]));
+                            Objects.Add(circle);
+                            CalculateSurfaceAreas();
                             Console.WriteLine("{0} created!", circle.GetType().Name);
                             break;
                         case "triangle":
-                            Triangle triangle = new Triangle();
-                            triangle.Height = double.Parse(arrCommands[2]);
-                            triangle.Width = double.Parse(arrCommands[3]);
-                            this.Add(triangle);
-                            this.CalculateSurfaceAreas();
+                            var triangle = new Triangle(
+                                Height: double.Parse(arrCommands[2]),
+                                Base: double.Parse(arrCommands[3])
+                            );
+                            Objects.Add(triangle);
+                            CalculateSurfaceAreas();
                             Console.WriteLine("{0} created!", triangle.GetType().Name);
                             break;
                         case "rectangle":
-                            Rectangle rectangle = new Rectangle();
-                            rectangle.Height = double.Parse(arrCommands[2]);
-                            rectangle.Width = double.Parse(arrCommands[3]);
-                            this.Add(rectangle);
-                            this.CalculateSurfaceAreas();
+                            var rectangle = new Rectangle(
+                                Height: double.Parse(arrCommands[2]),
+                                Width: double.Parse(arrCommands[3])
+                            );
+                            Objects.Add(rectangle);
+                            CalculateSurfaceAreas();
                             Console.WriteLine("{0} created!", rectangle.GetType().Name);
                             break;
                         default:
@@ -113,11 +84,11 @@ public class SurfaceAreaCalculator
                 this.ReadString(Console.ReadLine());
                 break;
             case "print":
-                if (arrSurfaceAreas != null)
+                if (SurfaceAreas != null)
                 {
-                    for (int i = 0; i < arrSurfaceAreas.Length; i++)
+                    for (int i = 0; i < SurfaceAreas.Count; i++)
                     {
-                        Console.WriteLine("[{0}] {1} surface area is {2}", i, arrObjects[i].GetType().Name, arrSurfaceAreas[i]);
+                        Console.WriteLine("[{0}] {1} surface area is {2}", i, Objects[i].GetType().Name, SurfaceAreas[i]);
                     }
                 }
                 else
@@ -127,15 +98,15 @@ public class SurfaceAreaCalculator
                 this.ReadString(Console.ReadLine());
                 break;
             case "reset":
-                this.arrSurfaceAreas = null;
-                this.arrObjects = null;
+                this.SurfaceAreas.Clear();
+                this.Objects.Clear();
                 Console.WriteLine("Reset state!!");
                 this.ReadString(Console.ReadLine());
                 break;
             case "exit":
                 break;
             default:
-                ShowCommands:
+            ShowCommands:
                 this.Logger.Log("Unknown command!!!");
                 this.Logger.Log("commands:");
                 this.Logger.Log("- create square {double} (create a new square)");
@@ -151,56 +122,28 @@ public class SurfaceAreaCalculator
         }
     }
 
+    /// <summary>
+    /// Calculates the shape surface areas and caches them for future use.
+    /// </summary>
+    /// <remarks>
+    /// An explicit calculation step allows for the caching of results that are slow to calculate.
+    /// If we can be certain such items will never be added to the application, 
+    /// it's better to calculate the surface area on the fly.
+    /// </remarks>
     public void CalculateSurfaceAreas()
     {
         try
         {
-            if (this.arrObjects != null)
+            foreach (var obj in Objects.Skip(SurfaceAreas.Count))
             {
-                this.arrSurfaceAreas = new double[this.arrObjects.Length];
-                for (int i = 0; i < this.arrObjects.Length; i++)
-                {
-                    if (this.arrObjects[i].GetType().Name == "Circle")
-                    {
-                        this.arrSurfaceAreas[i] = ((Circle)this.arrObjects[i]).CalculateSurfaceArea();
-                    }
-                    else
-                    {
-                        if (this.arrObjects[i].GetType().Name == "Rectangle")
-                        {
-                            this.arrSurfaceAreas[i] = ((Rectangle)this.arrObjects[i]).CalculateSurfaceArea();
-                        }
-                        else
-                        {
-                            if (this.arrObjects[i].GetType().Name == "Square")
-                            {
-                                this.arrSurfaceAreas[i] = ((Square)this.arrObjects[i]).CalculateSurfaceArea();
-                            }
-                            else
-                            {
-                                if (this.arrObjects[i].GetType().Name == "Triangle")
-                                {
-                                    this.arrSurfaceAreas[i] = ((Triangle)this.arrObjects[i]).CalculateSurfaceArea();
-                                }
-                                else
-                                {
-                                    throw new Exception("Cannot calculate surface area of unkown object!!!");
-                                }
-                            }
-                        }
-                    }
-                }
+                SurfaceAreas.Add(obj.CalculateSurfaceArea());
             }
-            else if (this.arrObjects == null)
-            {
-                throw new Exception("arrItems is null!!");
-            }
-
         }
         catch (Exception ex)
         {
-            this.Logger.Log(ex.ToString());
-            this.arrObjects = new object[0];
+            Logger.Log(ex.ToString());
+            Objects.Clear();
+            SurfaceAreas.Clear();
         }
     }
 }
