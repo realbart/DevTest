@@ -1,8 +1,8 @@
 ﻿namespace Refactoring.UnitTest.Refactroring;
 
-using global::Refactoring.Services.SurfaceCalculation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Refactoring.SurfaceCalculation;
 
 [TestClass]
 public class UnitTest
@@ -18,8 +18,8 @@ public class UnitTest
         var surfaceCalculatorMock2 = new Mock<ISurface>();
         surfaceCalculatorMock2.Setup(s => s.CalculateSurfaceArea()).Returns(expectedSurfaceArea2);
         var sut = new SurfaceAreaCalculator();
-        sut.Objects.Add(surfaceCalculatorMock1.Object);
-        sut.Objects.Add(surfaceCalculatorMock2.Object);
+        sut.Shapes.Add(surfaceCalculatorMock1.Object);
+        sut.Shapes.Add(surfaceCalculatorMock2.Object);
 
         sut.CalculateSurfaceAreas();
         var actual = sut.SurfaceAreas;

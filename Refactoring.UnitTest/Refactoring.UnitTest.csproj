@@ -26,7 +26,6 @@
     <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Refactoring.Services\Refactoring.Services.csproj" />
     <ProjectReference Include="..\Refactoring\Refactoring.csproj" />
   </ItemGroup>
 </Project>

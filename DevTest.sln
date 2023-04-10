@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Refactoring", "Refactoring\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Refactoring.UnitTest", "Refactoring.UnitTest\Refactoring.UnitTest.csproj", "{3E98232D-A7C6-4BCD-9D41-4C27439EF3C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Refactoring.Services", "Refactoring.Services\Refactoring.Services.csproj", "{624DCFE4-8A56-4D28-9C06-801852917EA1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{3E98232D-A7C6-4BCD-9D41-4C27439EF3C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E98232D-A7C6-4BCD-9D41-4C27439EF3C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E98232D-A7C6-4BCD-9D41-4C27439EF3C4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{624DCFE4-8A56-4D28-9C06-801852917EA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{624DCFE4-8A56-4D28-9C06-801852917EA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{624DCFE4-8A56-4D28-9C06-801852917EA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{624DCFE4-8A56-4D28-9C06-801852917EA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

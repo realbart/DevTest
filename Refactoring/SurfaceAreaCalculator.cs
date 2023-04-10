@@ -1,13 +1,16 @@
 ﻿namespace Refactoring;
 
-using Refactoring.Services.SurfaceCalculation;
+using Refactoring.SurfaceCalculation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 public class SurfaceAreaCalculator
 {
-    public List<ISurface> Objects { get; set; } = new List<ISurface>();
+    /// <summary>
+    /// Holds a collection of items that can have surface areas.
+    /// </summary>
+    public List<ISurface> Shapes { get; set; } = new List<ISurface>();
     public List<double> SurfaceAreas { get; set; } = new List<double>();
     internal Logger Logger { get; private set; }
 
@@ -41,13 +44,13 @@ public class SurfaceAreaCalculator
                     {
                         case "square":
                             var square = new Square(Side: double.Parse(arrCommands[2]));
-                            Objects.Add(square);
+                            Shapes.Add(square);
                             CalculateSurfaceAreas();
                             Console.WriteLine("{0} created!", square.GetType().Name);
                             break;
                         case "circle":
                             var circle = new Circle(Radius: double.Parse(arrCommands[2]));
-                            Objects.Add(circle);
+                            Shapes.Add(circle);
                             CalculateSurfaceAreas();
                             Console.WriteLine("{0} created!", circle.GetType().Name);
                             break;
@@ -56,7 +59,7 @@ public class SurfaceAreaCalculator
                                 Height: double.Parse(arrCommands[2]),
                                 Base: double.Parse(arrCommands[3])
                             );
-                            Objects.Add(triangle);
+                            Shapes.Add(triangle);
                             CalculateSurfaceAreas();
                             Console.WriteLine("{0} created!", triangle.GetType().Name);
                             break;
@@ -65,7 +68,7 @@ public class SurfaceAreaCalculator
                                 Height: double.Parse(arrCommands[2]),
                                 Width: double.Parse(arrCommands[3])
                             );
-                            Objects.Add(rectangle);
+                            Shapes.Add(rectangle);
                             CalculateSurfaceAreas();
                             Console.WriteLine("{0} created!", rectangle.GetType().Name);
                             break;
@@ -88,7 +91,7 @@ public class SurfaceAreaCalculator
                 {
                     for (int i = 0; i < SurfaceAreas.Count; i++)
                     {
-                        Console.WriteLine("[{0}] {1} surface area is {2}", i, Objects[i].GetType().Name, SurfaceAreas[i]);
+                        Console.WriteLine("[{0}] {1} surface area is {2}", i, Shapes[i].GetType().Name, SurfaceAreas[i]);
                     }
                 }
                 else
@@ -99,7 +102,7 @@ public class SurfaceAreaCalculator
                 break;
             case "reset":
                 this.SurfaceAreas.Clear();
-                this.Objects.Clear();
+                this.Shapes.Clear();
                 Console.WriteLine("Reset state!!");
                 this.ReadString(Console.ReadLine());
                 break;
@@ -134,7 +137,7 @@ public class SurfaceAreaCalculator
     {
         try
         {
-            foreach (var obj in Objects.Skip(SurfaceAreas.Count))
+            foreach (var obj in Shapes.Skip(SurfaceAreas.Count))
             {
                 SurfaceAreas.Add(obj.CalculateSurfaceArea());
             }
@@ -142,7 +145,7 @@ public class SurfaceAreaCalculator
         catch (Exception ex)
         {
             Logger.Log(ex.ToString());
-            Objects.Clear();
+            Shapes.Clear();
             SurfaceAreas.Clear();
         }
     }
