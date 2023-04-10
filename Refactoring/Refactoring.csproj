@@ -8,6 +8,8 @@
     <Product>Refactoring</Product>
     <Copyright>Copyright © Microsoft 2017</Copyright>
     <OutputPath>bin\$(Configuration)\</OutputPath>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -16,8 +18,16 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Thinktecture.Console.Abstractions" Version="2.5.0" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="Thinktecture" />
+    <Using Include="Thinktecture.Adapters" />
   </ItemGroup>
 </Project>

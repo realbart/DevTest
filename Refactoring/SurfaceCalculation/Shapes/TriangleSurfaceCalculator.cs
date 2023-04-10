@@ -1,4 +1,4 @@
-﻿namespace Refactoring.SurfaceCalculation;
+﻿namespace Refactoring.SurfaceCalculation.Shapes;
 
 using Refactoring.SurfaceCalculation;
 
@@ -11,12 +11,16 @@ using Refactoring.SurfaceCalculation;
 /// Strictly speaking, the width of a shape is traditionally interpreted to mean the width
 /// of the bounding box, yielding different results for obtuse-angled triangles.
 /// </remarks>
-public record Triangle
+internal record TriangleSurfaceCalculator
 (
     double Height,
     double Base
 ) : ISurface
 {
+    /// <inheritdoc/>
+    public string Name => "Triangle";
+
+
     /// <inheritdoc/>
     public double CalculateSurfaceArea() => .5 * Height * Base;
 }

@@ -2,9 +2,11 @@
 
 using System;
 
-class Program
+internal static class Program
 {
-    static void Main(string[] args)
+    internal static Startup Startup { get; set; } = new Startup();
+
+    internal static void Main(params string[] args)
     {
         Console.WriteLine(" -------------------------------------------------------------------------- ");
         Console.WriteLine("| Greetings and salutations fellow developer :D                            |");
@@ -17,9 +19,6 @@ class Program
         Console.WriteLine("|                                                                          |");
         Console.WriteLine("|                                                               Good luck! |");
         Console.WriteLine(" --------------------------------------------------------------------------");
-        SurfaceAreaCalculator surfaceAreaCalculator = new SurfaceAreaCalculator();
-        surfaceAreaCalculator.ShowCommands();
-        surfaceAreaCalculator.ReadString(Console.ReadLine());
-        Console.ReadKey();
+        Startup.Start();
     }
 }

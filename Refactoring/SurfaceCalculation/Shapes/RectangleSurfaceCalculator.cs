@@ -1,4 +1,4 @@
-﻿namespace Refactoring.SurfaceCalculation;
+﻿namespace Refactoring.SurfaceCalculation.Shapes;
 
 using Refactoring.SurfaceCalculation;
 
@@ -7,11 +7,14 @@ using Refactoring.SurfaceCalculation;
 /// </summary>
 /// <param name="Height">The height of the rectangle.</param>
 /// <param name="Width">The width of the rectangle.</param>
-public record Rectangle(
+internal record RectangleSurfaceCalculator(
     double Height,
     double Width
 ) : ISurface
 {
+    /// <inheritdoc/>
+    public string Name => "Rectangle";
+
     /// <inheritdoc/>
     public double CalculateSurfaceArea() => Height * Width;
 }

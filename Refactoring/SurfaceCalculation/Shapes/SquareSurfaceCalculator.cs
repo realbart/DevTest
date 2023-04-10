@@ -1,4 +1,4 @@
-﻿namespace Refactoring.SurfaceCalculation;
+﻿namespace Refactoring.SurfaceCalculation.Shapes;
 
 using Refactoring.SurfaceCalculation;
 
@@ -6,10 +6,14 @@ using Refactoring.SurfaceCalculation;
 /// Calculator for square surface areas.
 /// </summary>
 /// <param name="Side">The length of one side of the square</param>
-public record Square(
+internal record SquareSurfaceCalculator(
     double Side
-): ISurface
+) : ISurface
 {
+    /// <inheritdoc/>
+    public string Name => "Square";
+
+
     /// <inheritdoc/>
     public double CalculateSurfaceArea() => Side * Side;
 }
