@@ -7,7 +7,7 @@ public class CreateRectangleCommand : ICommand
 {
     public string CommandText => "create rectangle";
 
-    public string? Description => "create rectangle {height} {width} (create a new rectangle)";
+    public string Description => "create rectangle {height} {width} (create a new rectangle)";
 
     public void Invoke(CommandContext context, string[] args)
     {

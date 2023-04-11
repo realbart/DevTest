@@ -7,7 +7,7 @@ public class ResetCommand : ICommand
 {
     public string CommandText => "reset";
 
-    public string? Description => "reset (reset)";
+    public string Description => "reset (reset)";
 
     public void Invoke(CommandContext context, string[] args)
     {
