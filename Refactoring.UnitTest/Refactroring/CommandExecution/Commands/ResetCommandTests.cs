@@ -3,7 +3,7 @@
 using Refactoring.CommandExecution;
 using Refactoring.CommandExecution.Commands;
 using Refactoring.Commands;
-using Refactoring.SurfaceCalculation;
+using Refactoring.Models;
 
 [TestClass]
 public class ResetCommandTests
@@ -12,7 +12,7 @@ public class ResetCommandTests
     public void Invoke_RemovesShapesFromContext()
     {
         var commands = new Dictionary<string, ICommand>();
-        var shape = new Mock<ISurface>().Object;
+        var shape = new Shape(default!, default);
         var context = new CommandContext(commands);
         context.Shapes.Add(shape);
         context.Shapes.Add(shape);

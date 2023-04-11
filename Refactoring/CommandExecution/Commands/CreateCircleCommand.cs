@@ -2,7 +2,6 @@
 
 using Refactoring.CommandExecution;
 using Refactoring.Commands;
-using Refactoring.SurfaceCalculation.Shapes;
 
 public class CreateCircleCommand : ICommand
 {
@@ -12,9 +11,18 @@ public class CreateCircleCommand : ICommand
 
     public void Invoke(CommandContext context, string[] args)
     {
-        var circle = new CircleSurfaceCalculator(
-            Radius: double.Parse(args[2])
-            );
-        context.AddShape(circle);
-    } 
+        var radius = double.Parse(args[2]);
+        Invoke(context, radius);
+    }
+
+    /// <summary>
+    /// Does the actual invocation after parsing the parameters.
+    /// </summary>
+    /// <param name="context">The command context containing all state.</param>
+    /// <param name="radius">The distance for the center to the perimeter.</param>
+    private static void Invoke(CommandContext context, double radius)
+    {
+        var surfaceArea = Math.Round(Math.PI * (radius * radius), 2);
+        context.AddShape("Circle", surfaceArea);
+    }
 }

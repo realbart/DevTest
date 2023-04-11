@@ -2,8 +2,6 @@
 
 using Refactoring.CommandExecution;
 using Refactoring.Commands;
-using Refactoring.SurfaceCalculation;
-using Refactoring.SurfaceCalculation.Shapes;
 
 [TestClass]
 public class CommandContextExtensionsTests
@@ -24,10 +22,8 @@ public class CommandContextExtensionsTests
         var writer = new StringWriter();
         var commands = new Dictionary<string, ICommand>();
         var context = new CommandContext(commands) { Out = writer };
-        var shapeMock = new Mock<ISurface>();
-        shapeMock.Setup(s => s.Name).Returns("Apple");
 
-        CommandContextExtensions.AddShape(context, shapeMock.Object);
+        CommandContextExtensions.AddShape(context, default!, default);
 
         Assert.IsTrue(writer.ToString().Contains("Name created!"));
         Assert.AreEqual(1, context.Shapes.Count);

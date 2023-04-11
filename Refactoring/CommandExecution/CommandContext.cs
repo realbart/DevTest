@@ -2,7 +2,7 @@
 
 using Refactoring.CommandExecution;
 using Refactoring.CommandExecution.Commands;
-using Refactoring.SurfaceCalculation;
+using Refactoring.Models;
 
 /// <summary>
 /// Maintains state within the command loop
@@ -18,7 +18,7 @@ public record CommandContext
     /// <summary>
     /// A list of items to calculate the surface areas for.
     /// </summary>
-    public List<ISurface> Shapes { get; } = new List<ISurface>();
+    public List<Shape> Shapes { get; } = new List<Shape>();
 
     /// <summary>
     /// A boolean indicating if command execution should continue

@@ -2,7 +2,6 @@
 
 using Refactoring.CommandExecution;
 using Refactoring.Commands;
-using Refactoring.SurfaceCalculation.Shapes;
 
 public class CreateSquareCommand : ICommand
 {
@@ -12,9 +11,18 @@ public class CreateSquareCommand : ICommand
 
     public void Invoke(CommandContext context, string[] args)
     {
-        var circle = new SquareSurfaceCalculator(
-             Side: double.Parse(args[2])
-            );
-        context.AddShape(circle);
+        var side = double.Parse(args[2]);
+        Invoke(context, side);
+    }
+
+    /// <summary>
+    /// Does the actual invocation after parsing the parameters.
+    /// </summary>
+    /// <param name="context">The command context containing all state.</param>
+    /// <param name="side">The length of one side of the square</param>
+    private static void Invoke(CommandContext context, double side)
+    {
+        var surfaceArea = side * side;
+        context.AddShape("Square", surfaceArea);
     }
 }

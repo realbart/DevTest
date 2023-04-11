@@ -3,7 +3,7 @@
 using Refactoring.CommandExecution;
 using Refactoring.CommandExecution.Commands;
 using Refactoring.Commands;
-using Refactoring.SurfaceCalculation;
+using Refactoring.Models;
 
 [TestClass]
 public class PrintCommandTests
@@ -13,11 +13,9 @@ public class PrintCommandTests
     {
         var writer = new StringWriter();
         var commands = new Dictionary<string, ICommand>();
-        var shapeMock = new Mock<ISurface>();
-        shapeMock.Setup(s => s.Name).Returns("Apple");
-        shapeMock.Setup(s => s.CalculateSurfaceArea()).Returns(1337);
+        var shape = new Shape("Apple", 1337);
         var context = new CommandContext(commands) { Out = writer };
-        context.Shapes.Add(shapeMock.Object);
+        context.Shapes.Add(shape);
 
         var sut = new PrintCommand();
 

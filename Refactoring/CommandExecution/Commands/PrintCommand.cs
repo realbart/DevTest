@@ -2,7 +2,6 @@
 
 using Refactoring.CommandExecution;
 using Refactoring.Commands;
-using Refactoring.SurfaceCalculation;
 
 public class PrintCommand : ICommand
 {
@@ -15,9 +14,9 @@ public class PrintCommand : ICommand
             context.WriteLine("There are no surface areas to print");
             return;
         }
-        foreach ((ISurface shape, int index) in context.Shapes.Select((s, i) => (s, i)))
+        foreach ((var shape, var index) in context.Shapes.Select((s, i) => (s, i)))
         {
-            context.WriteLine($"[{index}] {shape.Name} surface area is {shape.CalculateSurfaceArea()}");
+            context.WriteLine($"[{index}] {shape.Name} surface area is {shape.SurfaceArea}");
         }
     }
 }

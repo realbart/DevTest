@@ -2,7 +2,6 @@
 
 using Refactoring.CommandExecution;
 using Refactoring.Commands;
-using Refactoring.SurfaceCalculation.Shapes;
 
 public class CreateRectangleCommand : ICommand
 {
@@ -12,10 +11,20 @@ public class CreateRectangleCommand : ICommand
 
     public void Invoke(CommandContext context, string[] args)
     {
-        var circle = new RectangleSurfaceCalculator(
-            Height: double.Parse(args[2]),
-            Width: double.Parse(args[3])
-            );
-        context.AddShape(circle);
+        var height = double.Parse(args[2]);
+        var width = double.Parse(args[3]);
+        Invoke(context, height, width);
+    }
+
+    /// <summary>
+    /// Does the actual invocation after parsing the parameters.
+    /// </summary>
+    /// <param name="context">The command context containing all state.</param>
+    /// <param name="height">The height of the rectangle.</param>
+    /// <param name="width">The width of the rectangle.</param>
+    private static void Invoke(CommandContext context, double height, double width)
+    {
+        var surfaceArea = height * width;
+        context.AddShape("Rectangle", surfaceArea);
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace Refactoring.CommandExecution;
 
 using Refactoring.Commands;
-using Refactoring.SurfaceCalculation;
+using Refactoring.Models;
 
 internal static class CommandContextExtensions
 {
@@ -14,10 +14,10 @@ internal static class CommandContextExtensions
     /// Adds the shape to the context.
     /// Writes that the shape has been created to the output textwriter.
     /// </summary>
-    public static void AddShape(this CommandContext context, ISurface shape)
+    public static void AddShape(this CommandContext context, string name, double surfaceArea)
     {
-        context.Shapes.Add(shape);
-        context.WriteLine($"{shape.Name} created!");
+        context.Shapes.Add(new Shape(name, surfaceArea));
+        context.WriteLine($"{name} created!");
     }
 
     /// <summary>
