@@ -10,7 +10,7 @@ public interface ICommand
     /// <summary>
     /// Returns a a string containing the command, the arguments and a description.
     /// </summary>
-    string Description { get; }
+    string? Description { get; }
 
     /// <summary>
     /// Executes the command.

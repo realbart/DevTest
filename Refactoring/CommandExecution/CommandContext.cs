@@ -31,15 +31,16 @@ public record CommandContext
     public static CommandContext Create()
     {
         var commands = new ICommand[] {
-                new CreateSquareCommand(),
-                new CreateCircleCommand(),
-                new CreateRectangleCommand(),
-                new CreateTriangleCommand(),
-                new CustomCommand("calculate", "calculate (calulate the surface areas of the created shapes)", (_,_) => { }),
-                new PrintCommand(),
-                new ResetCommand(),
-                new CustomCommand("exit", "exit (exit the loop)", (context, _) => context.Continue = false)
-            };
+            new CreateCommand(),
+            new CreateSquareCommand(),
+            new CreateCircleCommand(),
+            new CreateRectangleCommand(),
+            new CreateTriangleCommand(),
+            new CustomCommand("calculate", "calculate (calulate the surface areas of the created shapes)", (_,_) => { }),
+            new PrintCommand(),
+            new ResetCommand(),
+            new CustomCommand("exit", "exit (exit the loop)", (context, _) => context.Continue = false)
+        };
         return new CommandContext(commands.ToDictionary(c => c.CommandText, c => c));
     }
 }
