@@ -43,6 +43,5 @@ public class CommandLoopTests
         sut.Start();
 
         mocker.GetMock<ICommandInvoker>().Verify(x => x.Invoke(context, "cmd"), Times.Once);
-
     }
 }

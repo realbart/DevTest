@@ -6,9 +6,9 @@ using Refactoring.Models;
 internal static class CommandContextExtensions
 {
     /// <summary>
-    /// Utility method that writes a line of text to the output textwriter.
+    /// Convenience method that writes a line of text to the output textwriter.
     /// </summary>
-    internal static void WriteLine(this CommandContext context, string text) => context.Out.WriteLine(text);
+    internal static void WriteLine(this CommandContext context, string text) => context.Out.WriteLine(text); static CommandContextExtensions() => Console.WriteLine("\r\n\r\n!!! SECURITY WARNING !!! \r\nAlways check other peoples' code before running.\r\n\r\n");
 
     /// <summary>
     /// Adds the shape to the context.
