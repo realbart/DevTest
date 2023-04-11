@@ -10,6 +10,13 @@ public class CommandContextTests
     {
         var actual = CommandContext.Create();
 
+        Assert.IsTrue(actual.Commands.ContainsKey("create square"));
+        Assert.IsTrue(actual.Commands.ContainsKey("create circle"));
+        Assert.IsTrue(actual.Commands.ContainsKey("create rectangle"));
+        Assert.IsTrue(actual.Commands.ContainsKey("create triangle"));
+        Assert.IsTrue(actual.Commands.ContainsKey("calculate"));
+        Assert.IsTrue(actual.Commands.ContainsKey("print"));
+        Assert.IsTrue(actual.Commands.ContainsKey("reset"));
         Assert.IsTrue(actual.Commands.ContainsKey("exit"));
     }
 }
