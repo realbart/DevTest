@@ -15,14 +15,14 @@ public class CommandLoop : ICommandLoop
         this.context = context;
     }
 
+    /// <inheritdoc/>
     public void Start()
     {
         context.ListCommands();
-        do
+        while (context.Continue)
         {
             var commandLine = console.ReadLine();
             commandExecutor.Invoke(context, commandLine);
-
-        } while (context.Continue);
+        }
     }
 }

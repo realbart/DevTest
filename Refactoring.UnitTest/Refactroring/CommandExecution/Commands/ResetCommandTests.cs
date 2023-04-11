@@ -16,7 +16,6 @@ public class ResetCommandTests
         var context = new CommandContext(commands);
         context.Shapes.Add(shape);
         context.Shapes.Add(shape);
-
         var sut = new ResetCommand();
 
         sut.Invoke(context, default!);

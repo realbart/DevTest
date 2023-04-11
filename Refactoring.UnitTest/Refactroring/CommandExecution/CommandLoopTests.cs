@@ -30,10 +30,14 @@ public class CommandLoopTests
     public void Start_CallsExecuteWithCommandLine()
     {
         var commands = new Dictionary<string, ICommand>();
-        var context = new CommandContext(commands) { Continue = false };
+        var context = new CommandContext(commands);
         var mocker = new AutoMocker();
         mocker.Use(context);
-        mocker.GetMock<IConsole>().Setup(c => c.ReadLine()).Returns("cmd");
+        mocker.GetMock<IConsole>().Setup(c => c.ReadLine()).Returns(() =>
+        {
+            context.Continue = false;
+            return "cmd";
+        });
         var sut = mocker.CreateInstance<CommandLoop>();
 
         sut.Start();

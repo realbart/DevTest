@@ -16,7 +16,6 @@ public class PrintCommandTests
         var shape = new Shape("Apple", 1337);
         var context = new CommandContext(commands) { Out = writer };
         context.Shapes.Add(shape);
-
         var sut = new PrintCommand();
 
         sut.Invoke(context, default!);
