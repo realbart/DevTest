@@ -7,7 +7,7 @@ public class CreateCircleCommand : ICommand
 {
     public string CommandText => "create circle";
 
-    public string? Description => "create circle {double} (create a new circle)";
+    public string Description => "create circle {double} (create a new circle)";
 
     public void Invoke(CommandContext context, string[] args)
     {

@@ -7,7 +7,7 @@ public class CreateSquareCommand : ICommand
 {
     public string CommandText => "create square";
 
-    public string? Description => "create square {double} (create a new square)";
+    public string Description => "create square {double} (create a new square)";
 
     public void Invoke(CommandContext context, string[] args)
     {

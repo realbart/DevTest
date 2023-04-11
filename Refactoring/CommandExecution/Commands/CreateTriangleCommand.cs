@@ -7,7 +7,7 @@ public class CreateTriangleCommand : ICommand
 {
     public string CommandText => "create triangle";
 
-    public string? Description => "create triangle {height} {width} (create a new triangle)";
+    public string Description => "create triangle {height} {width} (create a new triangle)";
 
     public void Invoke(CommandContext context, string[] args)
     {
