@@ -14,10 +14,10 @@ public class CommandContextTests
         Assert.IsTrue(actual.Commands.ContainsKey("create circle"));
         Assert.IsTrue(actual.Commands.ContainsKey("create rectangle"));
         Assert.IsTrue(actual.Commands.ContainsKey("create triangle"));
+        Assert.IsTrue(actual.Commands.ContainsKey("create rhombus"));
         Assert.IsTrue(actual.Commands.ContainsKey("calculate"));
         Assert.IsTrue(actual.Commands.ContainsKey("print"));
         Assert.IsTrue(actual.Commands.ContainsKey("reset"));
         Assert.IsTrue(actual.Commands.ContainsKey("exit"));
-        Assert.IsTrue(actual.Commands.ContainsKey("create rhombus"));
     }
 }
