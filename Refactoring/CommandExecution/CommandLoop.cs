@@ -15,6 +15,7 @@ public class CommandLoop : ICommandLoop
         this.context = context;
     }
 
+    /// <inheritdoc/>
     public void Start()
     {
         context.ListCommands();
