@@ -11,5 +11,6 @@ public class CommandContextTests
         var actual = CommandContext.Create();
 
         Assert.IsTrue(actual.Commands.ContainsKey("exit"));
+        Assert.IsTrue(actual.Commands.ContainsKey("create rhombus"));
     }
 }
