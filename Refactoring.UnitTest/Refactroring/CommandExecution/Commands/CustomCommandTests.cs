@@ -13,10 +13,8 @@ public class CustomCommandTests
         var commands = new Dictionary<string, ICommand>();
         var expected1 = new CommandContext(commands);
         var expected2 = new[] { "one", "two" };
-
         CommandContext actual1 = default!;
         string[] actual2 = default!;
-
         var sut = new CustomCommand(default!, default!, (context, parms) => {
             actual1 = context;
             actual2 = parms;
