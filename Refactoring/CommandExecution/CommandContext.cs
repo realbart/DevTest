@@ -36,6 +36,7 @@ public record CommandContext
             new CreateCircleCommand(),
             new CreateRectangleCommand(),
             new CreateTriangleCommand(),
+            new CreateRhombusCommand(),
             new CustomCommand("calculate", "calculate (calulate the surface areas of the created shapes)", (_,_) => { }),
             new PrintCommand(),
             new ResetCommand(),
